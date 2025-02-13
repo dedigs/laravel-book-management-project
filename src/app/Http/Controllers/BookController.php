@@ -13,4 +13,20 @@ class BookController extends Controller
         $books = Book::all();
         return view('books.index', compact('books')); // same as ['books' => $books]
     }
+
+    public function create()
+    {
+        return view('books.create');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|max:255',
+            'author' => 'required|max:255',
+        ]);
+
+        Book::create($request->all());
+        return redirect()->route('books.index');
+    }
 }

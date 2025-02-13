@@ -21,4 +21,6 @@
       </tbody>
   </table>
 
+  <a href="{{ route('books.create') }}" class="btn btn-primary">Add new Book</a>
+
 @endsection

@@ -27,6 +27,12 @@ class BookController extends Controller
         ]);
 
         Book::create($request->all());
-        return redirect()->route('books.index');
+        return redirect()->route('books.index')->with('success', 'Book added successfully.');
+    }
+
+    public function destroy(Book $book)
+    {
+        $book->delete();
+        return redirect()->route('books.index')->with('success', 'Book deleted.');
     }
 }

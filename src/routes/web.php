@@ -1,9 +1,13 @@
 <?php
 
-// base CRUD routs for books
-Route::resource('books', BookController::class);
+use App\Http\Controllers\BookController;
 
-Route::get('/books/{book}/edit-author', [App\Http\Controllers\BookController::class, 'editAuthor'])->name('books.editAuthor');
-Route::put('/books/{book}/update-author', [App\Http\Controllers\BookController::class, 'updateAuthor'])->name('books.updateAuthor');
+// base CRUD routs for books
+Route::resource('books', 'BookController');
+// update author
+Route::get('/books/{book}/edit-author', [BookController::class, 'editAuthor'])->name('books.editAuthor');
+Route::put('/books/{book}/update-author', [BookController::class, 'updateAuthor'])->name('books.updateAuthor');
+// sort books
+Route::get('/books/sort/{by}', [BookController::class, 'sort'])->name('books.sort');
 
 Route::redirect('/', '/books');

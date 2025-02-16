@@ -9,6 +9,11 @@
 @endif
 
     <h1>Book List</h1>
+    <!-- Sort buttons -->
+    <div class="mb-3">
+        <a href="{{ route('books.sort', 'title') }}" class="btn btn-secondary">Sort by Title</a>
+        <a href="{{ route('books.sort', 'author') }}" class="btn btn-secondary">Sort by Author</a>
+    </div>
     <!-- Table with books -->
     <table class="table table-bordered">
         <thead>
@@ -44,7 +49,6 @@
     </table>
 
     <a href="{{ route('books.create') }}" class="btn btn-primary">Add new Book</a>
-
 @endsection
 
 @section('scripts')

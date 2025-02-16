@@ -50,4 +50,10 @@ class BookController extends Controller
         $book->update(['author' => $request->author]);
         return redirect()->route('books.index')->with('success', 'Author updated successfully.');
     }
+
+    public function sort($by)
+    {
+        $books = Book::orderBy($by)->get();
+        return view('books.index', compact('books'));
+    }
 }

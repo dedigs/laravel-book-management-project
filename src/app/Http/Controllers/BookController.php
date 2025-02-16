@@ -35,4 +35,19 @@ class BookController extends Controller
         $book->delete();
         return redirect()->route('books.index')->with('success', 'Book deleted.');
     }
+
+    public function editAuthor(Book $book)
+    {
+        return view('books.edit-author', compact('book'));
+    }
+
+    public function updateAuthor(Request $request, Book $book)
+    {
+        $request->validate([
+            'author' => 'required|max:255',
+        ]);
+
+        $book->update(['author' => $request->author]);
+        return redirect()->route('books.index')->with('success', 'Author updated successfully.');
+    }
 }

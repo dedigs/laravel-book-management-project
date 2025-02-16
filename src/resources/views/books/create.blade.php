@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
   <h1 class="mb-4">Add new book</h1>
 
   <form action="{{ route('books.store') }}" method="POST">
@@ -28,5 +27,4 @@
     </div>
     <button type="submit" class="btn btn-primary">Add Book</button>
   </form>
-
 @endsection

@@ -15,7 +15,8 @@
             <tr>
                 <th>Title</th>
                 <th>Author</th>
-                <th>Actions</th>
+                <th>Edit Author</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -23,6 +24,10 @@
                 <tr>
                     <td>{{ $book->title }}</td>
                     <td>{{ $book->author }}</td>
+                    <td>
+                        <!-- Edit button -->
+                        <a href="{{ route('books.editAuthor', $book->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                    </td>
                     <td>
                         <!-- Delete button -->
                         <form action="{{ route('books.destroy', $book->id) }}" method="POST" class="d-inline" onsubmit="return confirmDelete()">

@@ -22,7 +22,7 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|max:255',
+            'title' => 'required|max:255|unique:books,title',
             'author' => 'required|max:255',
         ]);
 

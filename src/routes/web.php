@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\BookController;
 
-// base CRUD routs for books
+// search book
+Route::get('/books/search', [BookController::class, 'search'])->name('books.search');
+// base CRUD routes for books
 Route::resource('books', 'BookController');
 // update author
 Route::get('/books/{book}/edit-author', [BookController::class, 'editAuthor'])->name('books.editAuthor');

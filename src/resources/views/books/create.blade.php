@@ -5,8 +5,7 @@
 
   <form action="{{ route('books.store') }}" method="POST">
     @csrf
-
-     <!-- Error display -->
+    <!-- Error message display -->
     @if ($errors->any())
     <div class="alert alert-danger">
       <ul style="margin-bottom: 0">

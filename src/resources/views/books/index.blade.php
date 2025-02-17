@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-
-@if(session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
+    <!-- Success message display -->
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
     <h1>Book List</h1>
     <!-- Sort buttons -->
@@ -14,6 +14,13 @@
         <a href="{{ route('books.sort', 'title') }}" class="btn btn-secondary">Sort by Title</a>
         <a href="{{ route('books.sort', 'author') }}" class="btn btn-secondary">Sort by Author</a>
     </div>
+    <!-- Search form -->
+    <form action="{{ route('books.search') }}" method="GET" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="query" class="form-control" placeholder="Search by title or author" value="{{ request('query') }}">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
     <!-- Table with books -->
     <table class="table table-bordered">
         <thead>
@@ -48,7 +55,11 @@
         </tbody>
     </table>
 
-    <a href="{{ route('books.create') }}" class="btn btn-primary">Add new Book</a>
+    @if(request('query'))
+        <a href="{{ route('books.index') }}" class="btn btn-secondary">Back</a>
+    @else
+        <a href="{{ route('books.create') }}" class="btn btn-primary">Add new Book</a>
+    @endif
 @endsection
 
 @section('scripts')

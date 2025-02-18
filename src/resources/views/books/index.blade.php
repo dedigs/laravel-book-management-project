@@ -21,6 +21,17 @@
             <button type="submit" class="btn btn-primary">Search</button>
         </div>
     </form>
+    <!-- Export CSV -->
+    <div class="mb-3">
+        <div class="btn-group">
+            <button class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">Export CSV</button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{{ route('books.export.csv', 'titles&authors') }}">Title & Author</a></li>
+                <li><a class="dropdown-item" href="{{ route('books.export.csv', 'titles') }}">Only Titles</a></li>
+                <li><a class="dropdown-item" href="{{ route('books.export.csv', 'authors') }}">Only Authors</a></li>
+            </ul>
+        </div>
+    </div>
     <!-- Table with books -->
     <table class="table table-bordered">
         <thead>

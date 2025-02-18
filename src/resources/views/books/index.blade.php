@@ -31,6 +31,17 @@
                 <li><a class="dropdown-item" href="{{ route('books.export.csv', 'authors') }}">Only Authors</a></li>
             </ul>
         </div>
+        <!-- Export XML -->
+        <div class="btn-group">
+            <button class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                Export XML
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{{ route('books.export.xml', 'titles&authors') }}">Title & Author</a></li>
+                <li><a class="dropdown-item" href="{{ route('books.export.xml', 'titles') }}">Only Titles</a></li>
+                <li><a class="dropdown-item" href="{{ route('books.export.xml', 'authors') }}">Only Authors</a></li>
+            </ul>
+        </div>
     </div>
     <!-- Table with books -->
     <table class="table table-bordered">

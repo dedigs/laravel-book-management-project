@@ -14,5 +14,6 @@ Route::put('/books/{book}/update-author', [BookController::class, 'updateAuthor'
 Route::get('/books/sort/{by}', [BookController::class, 'sort'])->name('books.sort');
 // export books
 Route::get('/books/export/csv/{type}', [BookExportController::class, 'exportCsv'])->name('books.export.csv');
+Route::get('/books/export/xml/{type}', [BookExportController::class, 'exportXml'])->name('books.export.xml');
 
 Route::redirect('/', '/books');

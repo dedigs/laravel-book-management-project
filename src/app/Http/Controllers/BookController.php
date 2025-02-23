@@ -53,8 +53,10 @@ class BookController extends Controller
 
     public function sort($by)
     {
-        $books = Book::orderBy($by)->get();
-        return view('books.index', compact('books'));
+        $direction = (request()->sort == $by && request()->direction == 'asc') ? 'desc' : 'asc';
+        $books = Book::orderBy($by, $direction)->get();
+
+        return view('books.index', compact('books', 'by', 'direction'));
     }
 
     public function search(Request $request)

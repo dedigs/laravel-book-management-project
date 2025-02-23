@@ -7,44 +7,45 @@
             {{ session('success') }}
         </div>
     @endif
+    <!-- Sort directions -->
+    @php
+        $by = $by ?? 'title';
+        $direction = (request()->sort == $by && request()->direction == 'asc') ? 'desc' : 'asc';
+    @endphp
 
     <h1>Book List</h1>
 
-    <!-- Export CSV -->
-    <div class="mb-3 d-flex justify-content-end">
-        <div class="btn-group me-2">
-            <button class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">Export CSV</button>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="{{ route('books.export.csv', 'titles&authors') }}">Title & Author</a></li>
-                <li><a class="dropdown-item" href="{{ route('books.export.csv', 'titles') }}">Only Titles</a></li>
-                <li><a class="dropdown-item" href="{{ route('books.export.csv', 'authors') }}">Only Authors</a></li>
-            </ul>
-        </div>
-
-        <!-- Export XML -->
-        <div class="btn-group">
-            <button class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">Export XML</button>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="{{ route('books.export.xml', 'titles&authors') }}">Title & Author</a></li>
-                <li><a class="dropdown-item" href="{{ route('books.export.xml', 'titles') }}">Only Titles</a></li>
-                <li><a class="dropdown-item" href="{{ route('books.export.xml', 'authors') }}">Only Authors</a></li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- Sort buttons -->
-    <div class="d-flex justify-content-between mb-3">
-        <div>
-            <a href="{{ route('books.sort', 'title') }}" class="btn btn-secondary">Sort by Title</a>
-            <a href="{{ route('books.sort', 'author') }}" class="btn btn-secondary">Sort by Author</a>
-        </div>
+    <div class="d-flex justify-content-between">
         <!-- Search form -->
         <form action="{{ route('books.search') }}" method="GET" class="w-50">
             <div class="input-group">
                 <input type="text" name="query" class="form-control" placeholder="Search by title or author" value="{{ request('query') }}">
-                <button type="submit" class="btn btn-primary">Search</button>
+                <button type="submit" class="btn btn-success">Search</button>
             </div>
         </form>
+        <!-- Export CSV -->
+        <div class="mb-3 d-flex justify-content-end">
+            <div class="btn-group me-2">
+                <button class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">Export CSV</button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="{{ route('books.export.csv', 'titles&authors') }}">Title & Author</a></li>
+                    <li><a class="dropdown-item" href="{{ route('books.export.csv', 'titles') }}">Only Titles</a></li>
+                    <li><a class="dropdown-item" href="{{ route('books.export.csv', 'authors') }}">Only Authors</a></li>
+                </ul>
+            </div>
+            <!-- Export XML -->
+            <div class="btn-group me-2">
+                <button class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">Export XML</button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="{{ route('books.export.xml', 'titles&authors') }}">Title & Author</a></li>
+                    <li><a class="dropdown-item" href="{{ route('books.export.xml', 'titles') }}">Only Titles</a></li>
+                    <li><a class="dropdown-item" href="{{ route('books.export.xml', 'authors') }}">Only Authors</a></li>
+                </ul>
+            </div>
+            <a href="{{ route('books.create') }}" class="btn btn-primary">
+                Add new Book
+            </a>
+        </div>
     </div>
 
     <!-- Table with books -->
@@ -52,8 +53,34 @@
         <table class="table table-bordered">
             <thead class="table-light text-center">
                 <tr>
-                    <th style="width: 40%;">Title</th>
-                    <th style="width: 30%;">Author</th>
+                    <th style="width: 40%;">
+                        <a href="{{ route('books.sort', ['by' => 'title', 'sort' => 'title', 'direction' => $direction]) }}" class="text-dark">
+                            Title
+                            @if(request()->sort == 'title')
+                                @if(request()->direction == 'asc')
+                                    <i class="bi bi-chevron-up"></i>
+                                @else
+                                    <i class="bi bi-chevron-down"></i>
+                                @endif
+                            @else
+                                <i class="bi bi-chevron-down"></i>
+                            @endif
+                        </a>
+                    </th>
+                    <th style="width: 30%;">
+                        <a href="{{ route('books.sort', ['by' => 'author', 'sort' => 'author', 'direction' => $direction]) }}" class="text-dark">
+                            Author
+                            @if(request()->sort == 'author')
+                                @if(request()->direction == 'asc')
+                                    <i class="bi bi-chevron-up"></i>
+                                @else
+                                    <i class="bi bi-chevron-down"></i>
+                                @endif
+                            @else
+                                <i class="bi bi-chevron-down"></i>
+                            @endif
+                        </a>
+                    </th>
                     <th style="width: 15%;">Edit Author</th>
                     <th style="width: 15%;">Delete</th>
                 </tr>
@@ -85,8 +112,6 @@
 
     @if(request('query'))
         <a href="{{ route('books.index') }}" class="btn btn-secondary">Back</a>
-    @else
-        <a href="{{ route('books.create') }}" class="btn btn-primary">Add new Book</a>
     @endif
 @endsection
 

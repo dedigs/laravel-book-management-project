@@ -53,7 +53,7 @@
         <table class="table table-bordered">
             <thead class="table-light text-center">
                 <tr>
-                    <th style="width: 40%;">
+                    <th class="col-md-6">
                         <a href="{{ route('books.sort', ['by' => 'title', 'sort' => 'title', 'direction' => $direction]) }}" class="text-dark">
                             Title
                             @if(request()->sort == 'title')
@@ -67,7 +67,7 @@
                             @endif
                         </a>
                     </th>
-                    <th style="width: 30%;">
+                    <th class="col-md-4">
                         <a href="{{ route('books.sort', ['by' => 'author', 'sort' => 'author', 'direction' => $direction]) }}" class="text-dark">
                             Author
                             @if(request()->sort == 'author')
@@ -81,8 +81,8 @@
                             @endif
                         </a>
                     </th>
-                    <th style="width: 15%;">Edit Author</th>
-                    <th style="width: 15%;">Delete</th>
+                    <th class="col-md-1">Edit Author</th>
+                    <th class="col-md-1">Delete</th>
                 </tr>
             </thead>
             <tbody>

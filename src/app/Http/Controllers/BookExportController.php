@@ -20,10 +20,9 @@ class BookExportController extends Controller
 
         $callback = function() use ($books) {
             $file = fopen('php://output', 'w');
-            fputcsv($file, array_keys($books[0] ?? []));
-
+            fwrite($file, implode(',', array_keys($books[0] ?? [])) . "\n");
             foreach ($books as $row) {
-                fputcsv($file, $row);
+                fwrite($file, implode(',', $row) . "\n");
             }
             fclose($file);
         };

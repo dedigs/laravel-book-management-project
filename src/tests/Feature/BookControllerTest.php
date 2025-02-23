@@ -25,19 +25,46 @@ class BookControllerTest extends TestCase
     }
 
     /** @test */
-    public function it_can_create_a_book()
+    public function it_creates_a_book_when_data_is_valid()
     {
         $response = $this->post(route('books.store'), [
-            'title' => 'New Book',
+            'title' => 'My Book',
             'author' => 'Danil',
         ]);
 
         $this->assertDatabaseHas('books', [
-            'title' => 'New Book',
+            'title' => 'My Book',
             'author' => 'Danil',
         ]);
 
         $response->assertRedirect(route('books.index'));
+    }
+
+    /** @test */
+    public function it_validates_empty_data()
+    {
+        $response = $this->post(route('books.store'), [
+            'title' => '',
+            'author' => '',
+        ]);
+
+        $response->assertSessionHasErrors(['title', 'author']);
+    }
+
+    /** @test */
+    public function it_validates_unique_title()
+    {
+        $response = $this->post(route('books.store'), [
+            'title' => 'Unique Book Title',
+            'author' => 'Author 2',
+        ]);
+
+        $response = $this->post(route('books.store'), [
+            'title' => 'Unique Book Title',
+            'author' => 'Author 2',
+        ]);
+
+        $response->assertSessionHasErrors('title');
     }
 
     /** @test */

@@ -13,7 +13,7 @@
         $direction = (request()->sort == $by && request()->direction == 'asc') ? 'desc' : 'asc';
     @endphp
 
-    <h1>Book List</h1>
+    <h1 class="mb-4 text-center">Book List</h1>
 
     <div class="d-flex justify-content-between">
         <!-- Search form -->

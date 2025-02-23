@@ -1,5 +1,8 @@
 # This is a Makefile
 # Run `make <command>` to quickly execute predefined commands
+install:
+	docker-compose exec laravel composer install
+
 up:
 	docker-compose up -d
 

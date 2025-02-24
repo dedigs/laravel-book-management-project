@@ -46,6 +46,7 @@ Tests use a separate database (`laravel_testing`), which is created after runnin
 ## 🛠️ Technologies
 
 - **Laravel 6** — PHP framework for web applications.
+- **Bootstrap 5** — Frontend framework for responsive UI design.
 - **Docker** — Containerization for the application.
 - **MySQL** — Database.
 - **PHPUnit** — Testing.
